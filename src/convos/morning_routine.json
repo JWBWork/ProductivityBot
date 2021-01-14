@@ -1,0 +1,31 @@
+{
+  "name": "morning routine",
+  "entry": false,
+  "function": "morning_routine",
+  "schedule": {
+    "triggers": [
+      {
+        "trigger": "cron",
+        "hour": 9,
+        "minute":0,
+        "second": 0,
+        "day_of_week": "mon,tue,wed,thu,fri,sat"
+      }
+    ]
+  },
+  "states": [{
+    "name": "finished routine tasks",
+    "entry": false,
+    "samples": [
+      "finished my routine",
+      "done", "finished",
+      "I'm done", "finished it",
+      "completed"
+    ],
+    "function": "finish_routine"
+  }, {
+    "name": "get_daily_goals",
+    "entry": false,
+    "function": "set_daily_goals"
+  }]
+}

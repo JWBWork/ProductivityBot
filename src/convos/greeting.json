@@ -1,0 +1,13 @@
+{
+  "name": "greeting",
+  "entry": true,
+  "states": [{
+    "name": "greeting",
+    "entry": true,
+    "samples": [
+      "hi", "hi 🤖", "hello NOUN", "hey NOUN",
+      "yo", "greetings", "hey bot", "INTJ"
+    ],
+    "function": "greeting"
+  }]
+}

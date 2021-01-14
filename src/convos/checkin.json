@@ -1,0 +1,23 @@
+{
+  "name": "check in",
+  "entry": false,
+  "function": "begin_check_in",
+  "schedule": {
+    "type": "or",
+    "triggers": [{
+      "trigger": "cron",
+      "hour": "9-17",
+      "minute": "*/30",
+      "second": "0"
+    }]
+  },
+  "states": [{
+    "name": "check in response",
+    "entry": false,
+    "samples": [
+      "VERB", "VERB youtube", "VERB netflix",
+      "I'm VERB on this project", "VERB on my site"
+    ],
+    "function": "record_check_in"
+  }]
+}

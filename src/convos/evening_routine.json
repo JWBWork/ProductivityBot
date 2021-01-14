@@ -1,0 +1,46 @@
+{
+  "name": "evening_routine",
+  "entry": false,
+  "function": "evening_routine",
+  "schedule": {
+    "triggers": [{
+      "trigger": "cron",
+      "day_of_week": "mon-sun",
+      "hour": "21",
+      "minute": "00",
+      "second": "00"
+    }]
+  },
+  "states": [{
+    "name": "goals_all",
+    "function": "meet_goals",
+    "kwargs": {
+      "success": "all"
+    },
+    "samples": ["yes", "yep", "yeah",
+      "VERB all of them", "I did", "all 3"]
+  },{
+    "name": "goals_none",
+    "function": "meet_goals",
+    "kwargs": {
+      "success": "none"
+    },
+    "samples": ["no", "sadly no", "nah",
+      "I did nothing today", "meet no goals",
+      "i VERB none of them"]
+  },{
+    "name": "goals_some",
+    "function": "meet_goals",
+    "kwargs": {
+      "success": "some"
+    },
+    "samples": ["some", "I  finished 2 out of 3", "only some",
+      "not all of them", "I finished two"]
+  },{
+    "name": "get_review_notes",
+    "function": "save_review_note"
+  },{
+    "name": "receive_goals",
+    "function": "save_goals"
+  }]
+}

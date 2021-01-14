@@ -1,0 +1,15 @@
+{
+  "name": "todo",
+  "entry": true,
+  "states": [{
+    "name": "enter todo",
+    "entry": true,
+    "function": "parse_todo",
+    "samples": [
+      "I need to go shopping at 9am tomorrow",
+      "next week I'm going to the doctor",
+      "remind me to work on my project tomorrow",
+      "I need to do laundry tomorrow"
+    ]
+  }]
+}
