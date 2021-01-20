@@ -4,7 +4,7 @@ from src.config import config
 account = config['twilio']['creds']['account']
 token = config['twilio']['creds']['token']
 client = Client(account, token)
-TESTING = False
+TESTING = config['testing']
 
 
 def send_message(message, number=None, from_=None):

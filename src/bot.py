@@ -1,10 +1,9 @@
 import re
-from pprint import pprint
 from src.texting import send_message
-from src.convos import CONVERSATIONS
+from src.convos import CONVERSATIONS, load_convos
 from src.scripts import load_line
 from src.convos import bot_classes
-from src.convos.spacy_nlp import nlp
+from src.subBots.spacy_nlp import nlp
 from collections import defaultdict
 
 
@@ -16,7 +15,19 @@ class Bot(*bot_classes):
         self.temp = defaultdict(lambda: None)
         print(f"bot initialized with {len(self.CONVERSATIONS)} conversations")
 
+    def reload_convos(self):
+        print('reloading conversations')
+        self.CONVERSATIONS = load_convos()
+
+        print(f'{len(self.CONVERSATIONS)} convos loaded')
+
     def parse(self, user_input):
+        functions = {
+            "reload": "reload_convos",
+        }
+        if user_input[0] == ':':
+            return getattr(self, functions[user_input[1:]])()
+
         user_input = re.sub(r"[^\w\s]+", '', user_input).lower()
 
         if self.force_state:

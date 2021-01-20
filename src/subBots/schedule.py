@@ -3,10 +3,6 @@ from apscheduler.triggers.combining import AndTrigger, OrTrigger
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 import atexit
-from datetime import datetime
-from src import app
-import os
-import json
 from src.convos import CONVERSATIONS
 from src.bot import my_bot
 
@@ -29,17 +25,23 @@ def trigger_fact(schedule):
         return OrTrigger(trigs)
 
 
-# @app.before_first_request
-def init_scheduler():
-    scheduler = BackgroundScheduler()
-    for c in CONVERSATIONS:
-        if c.get('schedule'):
-            print(f"scheduling {c['name']}")
-            scheduler.add_job(
-                func=getattr(my_bot, c['function']),
-                # **c['schedule']
-                trigger=trigger_fact(c['schedule'])
-            )
-    atexit.register(lambda: scheduler.shutdown())
-    scheduler.start()
+class ScheduleBot:
+    def __init__(self):
+        self.scheduler = self._load_schedules()
 
+    def reload_schedules(self):
+        self.scheduler = self._load_schedules()
+
+    def _load_schedules(self):
+        # TODO: update schedules ?
+        scheduler = BackgroundScheduler()
+        for c in CONVERSATIONS:
+            if c.get('schedule'):
+                print(f"scheduling {c['name']}")
+                scheduler.add_job(
+                    func=getattr(my_bot, c['function']),
+                    trigger=trigger_fact(c['schedule'])
+                )
+        atexit.register(lambda: scheduler.shutdown())
+        scheduler.start()
+        return scheduler

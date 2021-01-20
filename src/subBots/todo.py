@@ -1,4 +1,4 @@
-from src.convos.spacy_nlp import nlp
+from src.subBots.spacy_nlp import nlp
 from src.texting import send_message
 
 
